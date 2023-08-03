@@ -4,7 +4,7 @@
 > This means you don't have to use the Vercel template & can just use the Remix
 > template instead.
 
-# Welcome to Remix!
+# Welcome to my own Blog Remix App!
 
 - [Remix Docs](https://remix.run/docs)
 

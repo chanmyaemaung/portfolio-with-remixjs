@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LinksFunction, LoaderArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -16,6 +16,12 @@ import {
   ThemeProvider,
   useTheme,
 } from "remix-themes";
+import Navbar from "./components/Navbar";
+import { ReactNode } from "react";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export const loader = async ({ request }: LoaderArgs) => {
   const { getTheme } = await themeSessionResolver(request);
@@ -48,12 +54,23 @@ function App() {
         <PreventFlashOnWrongTheme ssrTheme={Boolean(theme)} />
         <Links />
       </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+      <body className="bg-white text-black dark:bg-slate-900 dark:text-white h-full selection:bg-slate-50 dark:selection:bg-slate-800">
+        <Layout>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </Layout>
       </body>
     </html>
+  );
+}
+
+function Layout({ children }: { children: ReactNode }) {
+  return (
+    <div>
+      <Navbar />
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
+    </div>
   );
 }

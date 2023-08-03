@@ -19,6 +19,7 @@ import {
 import Navbar from "./components/Navbar";
 import { ReactNode } from "react";
 
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
 ];

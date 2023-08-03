@@ -15,9 +15,9 @@ const Navbar = () => {
                 <div className="flex items-center">
                   {/* Logo Title */}
                   <Link to="/">
-                    <h1 className="text-2xl font-medium">
-                      Chenlay<span className="text-blue-500">Blog</span>
-                    </h1>
+                    <h3 className="text-2xl font-medium">
+                      CL<span className="text-blue-500">Blog</span>
+                    </h3>
                   </Link>
                 </div>
                 {/* Navbar Links */}

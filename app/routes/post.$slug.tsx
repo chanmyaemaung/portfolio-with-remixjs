@@ -70,8 +70,8 @@ const PostSlug = () => {
         </div>
       </header>
 
-      <div className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
-        <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+      <div className="divide-y divide-slate-200 pb-8 dark:divide-slate-700 xl:divide-y-0">
+        <div className="divide-y divide-slate-200 dark:divide-slate-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
           <div className="prose max-w-none pt-10 pb-8 dark:prose-invert prose-lg">
             <RichText
               content={post.post.content.raw}
@@ -98,7 +98,7 @@ const PostSlug = () => {
                     href={href}
                     target={openInNewTab ? "_blank" : "_self"}
                     {...rest}
-                    className="text-teal-500 hover:text-teal-600"
+                    className="text-blue-500 hover:text-blue-600"
                   >
                     {children}
                   </a>

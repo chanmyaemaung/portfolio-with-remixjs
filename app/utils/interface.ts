@@ -32,3 +32,20 @@ export interface iProjects {
     publishedAt: String;
   }[];
 }
+
+export interface MyProfile {
+  profile: {
+    id: String;
+    name: String;
+    overview: String;
+    about: any;
+    profileImage: {
+      url: String;
+    };
+    github: String;
+    facebook: String;
+    instagram: String;
+    linkedin: String;
+    email: String;
+  };
+}

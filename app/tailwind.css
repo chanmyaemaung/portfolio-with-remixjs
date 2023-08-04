@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.xl\:rounded-full {
+  border-radius: 50%; /* Set the border-radius to 50% to make it circular */
+}

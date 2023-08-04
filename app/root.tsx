@@ -19,7 +19,6 @@ import {
 import Navbar from "./components/Navbar";
 import { ReactNode } from "react";
 
-
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
 ];
@@ -29,6 +28,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   return {
     theme: getTheme(),
+    googleAnalyticsTrackingId: "G-W67JJJTSNL",
   };
 };
 
@@ -51,7 +51,6 @@ function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <Meta />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(theme)} />
         <Links />
       </head>

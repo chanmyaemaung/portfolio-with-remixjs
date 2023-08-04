@@ -14,6 +14,9 @@ export interface PostId {
     title: String;
     slug: String;
     overview: String;
+    featuredImage: {
+      url: String;
+    }
     publishedAt: String;
     content: any;
   };
@@ -48,4 +51,16 @@ export interface MyProfile {
     linkedin: String;
     email: String;
   };
+}
+
+export interface SEOProps {
+  title: string;
+  description: string;
+  keywords: string;
+  canonicalUrl: string;
+  robots: string;
+  author: string;
+  publisher: string;
+  imageUrl: string;
+  twitterHandle: string;
 }

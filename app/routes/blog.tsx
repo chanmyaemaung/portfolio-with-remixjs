@@ -2,7 +2,20 @@ import { LoaderArgs, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { gql } from "graphql-request";
 import { hygraph } from "~/utils/hygraph.server";
-import { Post } from "~/utils/interface";
+import { Post, SEOProps } from "~/utils/interface";
+import { HelmetProvider } from "react-helmet-async";
+import {
+  blogDescription,
+  blogImageUrl,
+  blogKeywords,
+  blogTitle,
+  siteAuthor,
+  sitePublisher,
+  siteUrl,
+  twitterHandle,
+} from "~/utils/seotags";
+import SEO from "~/components/SeoTags";
+import Breadcrumb from "~/components/Breadcrumb";
 
 interface iAppProps {
   posts: Post;
@@ -30,8 +43,22 @@ export async function loader({}: LoaderArgs) {
 const Blog = () => {
   const { posts } = useLoaderData() as iAppProps;
 
+  const seo: SEOProps = {
+    title: `CL — Personal Blog ${blogTitle}`,
+    description: blogDescription,
+    keywords: blogKeywords,
+    canonicalUrl: `${siteUrl}/blog`,
+    robots: "index, follow",
+    author: siteAuthor,
+    publisher: sitePublisher,
+    imageUrl: blogImageUrl,
+    twitterHandle: twitterHandle,
+  };
+
   return (
-    <>
+    <HelmetProvider>
+      <SEO seo={seo} />
+
       <div className="divide-y divide-slate-200 dark:divide-slate-700">
         <div className="space-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-blue-900 dark:text-blue-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
@@ -39,12 +66,14 @@ const Blog = () => {
           </h1>
         </div>
 
+        <Breadcrumb postTitle="A list of all the weekly or daily posts." />
+
         <ul>
           {posts.posts.map((post) => (
             <li key={post.id.toString()} className="py-4">
               <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <div>
-                  <p className="text-base font-medium leading-6 text-blue-500">
+                  <h3 className="text-base font-medium leading-6 text-blue-500">
                     {new Date(post.createdAt.toString()).toLocaleDateString(
                       "en-US",
                       {
@@ -53,7 +82,7 @@ const Blog = () => {
                         year: "numeric",
                       }
                     )}
-                  </p>
+                  </h3>
                 </div>
 
                 <Link
@@ -62,9 +91,9 @@ const Blog = () => {
                   className="space-y-3 xl:col-span-3"
                 >
                   <div>
-                    <h3 className="text-2xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100">
+                    <h2 className="text-2xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100">
                       {post.title}
-                    </h3>
+                    </h2>
                   </div>
                   <div className="prose max-w-none text-slate-500 dark:text-slate-400">
                     {post.overview}
@@ -75,7 +104,7 @@ const Blog = () => {
           ))}
         </ul>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

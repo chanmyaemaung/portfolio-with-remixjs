@@ -10,6 +10,7 @@ const SEO: React.FC<SEOComponentProps> = ({ seo }) => {
   const {
     title,
     description,
+    siteName,
     keywords,
     canonicalUrl,
     robots,
@@ -41,7 +42,7 @@ const SEO: React.FC<SEOComponentProps> = ({ seo }) => {
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:site_name" content="CL &mdash; Personal Blog" />
+      <meta property="og:site_name" content={siteName} />
       {/* Replace with your actual site name */}
       <meta property="og:locale" content="en_US" />
       {/* Set the locale according to your content */}

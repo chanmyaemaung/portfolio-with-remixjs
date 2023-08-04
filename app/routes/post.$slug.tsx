@@ -13,7 +13,6 @@ import { HelmetProvider } from "react-helmet-async";
 import {
   blogImageUrl,
   blogKeywords,
-  blogTitle,
   siteAuthor,
   sitePublisher,
   siteUrl,
@@ -63,6 +62,7 @@ const PostSlug = () => {
   const seo: SEOProps = {
     title: `CL Blog | ${post.post.title}`,
     description: `${post.post.overview}`,
+    siteName: `CL Blog | ${post.post.title}`,
     keywords: blogKeywords,
     canonicalUrl: `${siteUrl}/post/${post.post.slug}`,
     robots: "index, follow",

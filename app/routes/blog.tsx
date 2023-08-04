@@ -15,7 +15,6 @@ import {
   twitterHandle,
 } from "~/utils/seotags";
 import SEO from "~/components/SeoTags";
-import Breadcrumb from "~/components/Breadcrumb";
 
 interface iAppProps {
   posts: Post;
@@ -46,6 +45,7 @@ const Blog = () => {
   const seo: SEOProps = {
     title: `CL — Personal Blog ${blogTitle}`,
     description: blogDescription,
+    siteName: `CL — Personal Blog ${blogTitle}`,
     keywords: blogKeywords,
     canonicalUrl: `${siteUrl}/blog`,
     robots: "index, follow",

@@ -56,6 +56,7 @@ export interface MyProfile {
 export interface SEOProps {
   title: string;
   description: string;
+  siteName: string;
   keywords: string;
   canonicalUrl: string;
   robots: string;

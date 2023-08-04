@@ -24,7 +24,7 @@ interface iAppProps {
 export async function loader({}: LoaderArgs) {
   const query = gql`
     query MyPosts {
-      posts(orderBy: publishedAt_DESC) {
+      posts(orderBy: publishedAt_DESC, first: 10) {
         id
         slug
         title
@@ -66,43 +66,47 @@ const Blog = () => {
           </h1>
         </div>
 
-        <Breadcrumb postTitle="A list of all the weekly or daily posts." />
-
-        <ul>
-          {posts.posts.map((post) => (
-            <li key={post.id.toString()} className="py-4">
-              <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                <div>
-                  <h3 className="text-base font-medium leading-6 text-blue-500">
-                    {new Date(post.createdAt.toString()).toLocaleDateString(
-                      "en-US",
-                      {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      }
-                    )}
-                  </h3>
-                </div>
-
-                <Link
-                  to={`/post/${post.slug}`}
-                  prefetch="intent"
-                  className="space-y-3 xl:col-span-3"
-                >
+        {posts.posts.length === 0 ? (
+          <p className="text-gray-500 dark:text-gray-400">
+            No blog posts available.
+          </p>
+        ) : (
+          <ul>
+            {posts.posts.map((post) => (
+              <li key={post.id.toString()} className="py-4">
+                <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <div>
-                    <h2 className="text-2xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100">
-                      {post.title}
-                    </h2>
+                    <h3 className="text-base font-medium leading-6 text-blue-500">
+                      {new Date(post.createdAt.toString()).toLocaleDateString(
+                        "en-US",
+                        {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )}
+                    </h3>
                   </div>
-                  <div className="prose max-w-none text-slate-500 dark:text-slate-400">
-                    {post.overview}
-                  </div>
-                </Link>
-              </article>
-            </li>
-          ))}
-        </ul>
+
+                  <Link
+                    to={`/post/${post.slug}`}
+                    prefetch="intent"
+                    className="space-y-3 xl:col-span-3"
+                  >
+                    <div>
+                      <h2 className="text-2xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100">
+                        {post.title}
+                      </h2>
+                    </div>
+                    <div className="prose max-w-none text-slate-500 dark:text-slate-400">
+                      {post.overview}
+                    </div>
+                  </Link>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </HelmetProvider>
   );

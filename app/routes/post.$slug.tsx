@@ -38,9 +38,7 @@ export async function loader({ params }: LoaderArgs) {
         title
         slug
         overview
-        featuredImage {
-          url
-        }
+        featuredImage
         publishedAt
         content {
           raw

@@ -5,3 +5,8 @@
 .xl\:rounded-full {
   border-radius: 50%; /* Set the border-radius to 50% to make it circular */
 }
+
+.blur {
+  filter: blur(10px); /* Adjust the amount of blur as needed */
+  transition: filter 0.3s ease-in-out;
+}

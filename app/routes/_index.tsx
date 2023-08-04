@@ -15,6 +15,7 @@ import {
   twitterHandle,
 } from "~/utils/seotags";
 import SEO from "~/components/SeoTags";
+import { useState } from "react";
 
 const seo: SEOProps = {
   title: `CL — Personal Blog ${blogTitle}`,
@@ -64,13 +65,22 @@ export async function loader({}: LoaderArgs) {
 
 const IndexPage = () => {
   const { profile } = useLoaderData() as iAppProps;
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const imageUrl =
+    profile.profile.profileImage?.url === undefined || null
+      ? blogImageUrl
+      : `${profile.profile.profileImage?.url}`;
 
   const {
     id,
     name,
     overview,
     about,
-    profileImage: { url: profileImage },
     github,
     facebook,
     instagram,
@@ -91,10 +101,13 @@ const IndexPage = () => {
         <div className="items-center spacey-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
           <div className="flex flex-col items-center pt-8" data-key={id}>
             <img
-              src={profileImage.toString()}
+              src={imageUrl}
               alt="Chen Lay Profile Image"
-              className="h-48 w-48 rounded-full object-cover object-center xl:h-64 xl:w-64 xl:rounded-full"
+              className={`h-48 w-48 rounded-full object-cover object-center xl:h-64 xl:w-64 xl:rounded-full ${
+                imageLoaded ? "" : "blur"
+              }`}
               loading="lazy"
+              onLoad={handleImageLoad}
             />
             <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">
               {name}

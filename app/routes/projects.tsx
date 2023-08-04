@@ -1,6 +1,7 @@
 import { LoaderArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { gql } from "graphql-request";
+import { useState } from "react";
 import { hygraph } from "~/utils/hygraph.server";
 import { iProjects } from "~/utils/interface";
 
@@ -31,6 +32,11 @@ export async function loader({}: LoaderArgs) {
 
 const Projects = () => {
   const { projects } = useLoaderData() as iAppProps;
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   return (
     <div className="divide-y divide-blue-200 dark:divide-blue-700">
@@ -49,7 +55,11 @@ const Projects = () => {
             <img
               src={project.titleImage.url.toString()}
               alt="Image of Project"
-              className="h-56 w-full object-cover"
+              className={`h-56 w-full object-cover ${
+                imageLoaded ? "" : "blur"
+              }`}
+              loading="lazy"
+              onLoad={handleImageLoad}
             />
             <div className="p-4 sm:p-6">
               <a href={project.link.toString()} target="_blank">

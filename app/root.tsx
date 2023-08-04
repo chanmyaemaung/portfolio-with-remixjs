@@ -2,7 +2,6 @@ import type { LinksFunction, LoaderArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -17,7 +16,7 @@ import {
   useTheme,
 } from "remix-themes";
 import Navbar from "./components/Navbar";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -67,10 +66,56 @@ function App() {
 }
 
 function Layout({ children }: { children: ReactNode }) {
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
+      {/* Scroll to Top Button */}
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className={`fixed bottom-4 right-4 p-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-opacity duration-300 ${
+            showScrollButton ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }

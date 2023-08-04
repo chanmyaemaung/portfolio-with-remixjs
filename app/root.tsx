@@ -53,6 +53,22 @@ function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(theme)} />
         <Links />
+
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=G-W67JJJTSNL`}
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-W67JJJTSNL');
+            `,
+          }}
+        ></script>
       </head>
       <body className="bg-white text-black dark:bg-slate-900 dark:text-white h-full selection:bg-slate-50 dark:selection:bg-slate-800">
         <Layout>

@@ -4,7 +4,6 @@ import { hygraph } from "~/utils/hygraph.server";
 import { MyProfile, SEOProps } from "~/utils/interface";
 import { useLoaderData } from "@remix-run/react";
 import { RichText } from "@graphcms/rich-text-react-renderer";
-import { HelmetProvider } from "react-helmet-async";
 import {
   blogImageUrl,
   blogKeywords,
@@ -22,6 +21,7 @@ const seo: SEOProps = {
   description:
     "I am a highly motivated and skilled web developer passionate about building beautiful, functional, and user-friendly websites.",
   keywords: blogKeywords,
+  siteName: `CL — Personal Blog ${blogTitle}`,
   canonicalUrl: `${siteUrl}`,
   robots: "index, follow",
   author: siteAuthor,
@@ -89,7 +89,7 @@ const IndexPage = () => {
   } = profile.profile;
 
   return (
-    <HelmetProvider>
+    <>
       <SEO seo={seo} />
       <div className="divide-y divide-slate-200 dark:divide-slate-700">
         <div className="space-y-2 pt-6 pb-8 md:space-x-5">
@@ -203,7 +203,7 @@ const IndexPage = () => {
           </div>
         </div>
       </div>
-    </HelmetProvider>
+    </>
   );
 };
 

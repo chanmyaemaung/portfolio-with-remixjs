@@ -9,7 +9,6 @@ import "prismjs/plugins/line-numbers/prism-line-numbers";
 import theme from "prismjs/themes/prism-tomorrow.css";
 import linenum from "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import { useEffect } from "react";
-import { HelmetProvider } from "react-helmet-async";
 import {
   blogImageUrl,
   blogKeywords,
@@ -75,7 +74,7 @@ const PostSlug = () => {
   useEffect(() => Prism.highlightAll(), []);
 
   return (
-    <HelmetProvider>
+    <>
       <SEO seo={seo} />
       <div className="xl:divide-y xl:divide-slate-200 xl:dark:divide-slate-700">
         <header className="pt-6 xl:pb-6">
@@ -143,7 +142,7 @@ const PostSlug = () => {
           </div>
         </div>
       </div>
-    </HelmetProvider>
+    </>
   );
 };
 

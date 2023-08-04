@@ -3,7 +3,6 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { gql } from "graphql-request";
 import { hygraph } from "~/utils/hygraph.server";
 import { Post, SEOProps } from "~/utils/interface";
-import { HelmetProvider } from "react-helmet-async";
 import {
   blogDescription,
   blogImageUrl,
@@ -56,7 +55,7 @@ const Blog = () => {
   };
 
   return (
-    <HelmetProvider>
+    <>
       <SEO seo={seo} />
 
       <div className="divide-y divide-slate-200 dark:divide-slate-700">
@@ -108,7 +107,7 @@ const Blog = () => {
           </ul>
         )}
       </div>
-    </HelmetProvider>
+    </>
   );
 };
 

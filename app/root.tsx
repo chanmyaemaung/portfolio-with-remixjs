@@ -17,6 +17,7 @@ import {
 } from "remix-themes";
 import Navbar from "./components/Navbar";
 import { ReactNode, useEffect, useState } from "react";
+import { HelmetProvider } from "react-helmet-async";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -89,7 +90,7 @@ function Layout({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div>
+    <HelmetProvider>
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
       {/* Scroll to Top Button */}
@@ -116,6 +117,6 @@ function Layout({ children }: { children: ReactNode }) {
           </svg>
         </button>
       )}
-    </div>
+    </HelmetProvider>
   );
 }

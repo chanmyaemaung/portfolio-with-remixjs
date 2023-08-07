@@ -1,6 +1,6 @@
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import { LinksFunction, LoaderArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import { gql } from "graphql-request";
 import { hygraph } from "~/utils/hygraph.server";
 import { PostId, SEOProps } from "~/utils/interface";
@@ -141,6 +141,10 @@ const PostSlug = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="w-full">
+        <Outlet />
       </div>
     </>
   );
